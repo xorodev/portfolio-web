@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Wilfredo Rodríguez | Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;800&display=swap');
+        
+        :root {
+            --bg-color: #050505;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --bezier: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-color); 
+            color: #94a3b8;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        .glass { 
+            background: rgba(255, 255, 255, 0.02); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+        }
+
+        .text-gradient { 
+            background: linear-gradient(to right, #60a5fa, #34d399); 
+            -webkit-background-clip: text; 
+            background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            color: transparent; 
+        }
+
+        .skill-card { 
+            transition: all 0.5s var(--bezier); 
+        }
+
+        .skill-card i {
+            transition: all 0.5s var(--bezier);
+        }
+
+        .skill-card:hover { 
+            background: rgba(255, 255, 255, 0.04); 
+            transform: translateY(-5px); 
+        }
+
+        .skill-card:hover i {
+            transform: scale(1.2) rotate(8deg);
+        }
+
+        .hover-blue:hover { border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 10px 30px -15px rgba(59, 130, 246, 0.3); }
+        .hover-emerald:hover { border-color: rgba(16, 185, 129, 0.5); box-shadow: 0 10px 30px -15px rgba(16, 185, 129, 0.3); }
+        .hover-purple:hover { border-color: rgba(168, 85, 247, 0.5); box-shadow: 0 10px 30px -15px rgba(168, 85, 247, 0.3); }
+        .hover-orange:hover { border-color: rgba(249, 115, 22, 0.5); box-shadow: 0 10px 30px -15px rgba(249, 115, 22, 0.3); }
+
+        #mobile-menu {
+            transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #050505;
+            overflow-y: auto;
+        }
+        
+        #mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .menu-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .menu-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-blue);
+            transition: width 0.3s ease;
+        }
+
+        .menu-link:hover::after {
+            width: 100%;
+        }
+
+        @keyframes star-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+        .animate-star { animation: star-pulse 2s infinite ease-in-out; }
+
+        ::selection { background: rgba(59, 130, 246, 0.2); color: #fff; }
+
+        @media (max-width: 320px) {
+            h1 { font-size: 2.5rem !important; }
+            .glass { padding: 1.5rem !important; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed top-0 w-full z-[100] border-b border-white/5 bg-black/60 backdrop-blur-xl">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex justify-between items-center">
+            <a href="#" class="text-white font-extrabold tracking-tighter text-xl sm:text-2xl group relative z-[110]">
+                XORO<span class="text-blue-500 group-hover:text-emerald-400 transition-colors duration-500">DEV</span>
+            </a>
+
+            <button id="menu-toggle" class="relative z-[110] p-2 focus:outline-none group">
+                <div class="space-y-1.5 sm:space-y-2">
+                    <span id="line1" class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+                    <span id="line2" class="block w-4 h-0.5 bg-white ml-auto transition-all duration-300"></span>
+                </div>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="translate-x-full flex items-center justify-center z-[105]">
+            <div class="flex flex-col items-center space-y-6 sm:space-y-8 text-center p-6 w-full">
+                <div class="text-[10px] uppercase tracking-[0.5em] text-slate-500 font-bold mb-2 sm:mb-4">Navegación</div>
+                <a href="#perfil" class="menu-link text-white text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tighter">Acerca de mí</a>
+                <a href="#stack" class="menu-link text-white text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tighter">Skills</a>
+                <a href="#tech-clave" class="menu-link text-white text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tighter">Tecnologías</a>
+                <a href="#experiencia" class="menu-link text-white text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tighter">Trayectoria</a>
+                <a href="#educacion" class="menu-link text-white text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tighter">Educación e Idiomas</a>
+                <a href="#contacto" class="menu-link text-blue-500 text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tighter">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 overflow-hidden">
+        
+        <section class="min-h-screen flex flex-col justify-center pt-32 sm:pt-20">
+            <div class="flex flex-col md:flex-row md:items-center gap-10 md:gap-16">
+                <div class="relative group w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 shrink-0 mx-auto md:mx-0 order-first md:order-last">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative w-full h-full rounded-full border border-white/10 overflow-hidden bg-black">
+                        <img src="photo-profile.png" alt="photography-official" class="w-full h-full object-cover object-center object-top grayscale hover:grayscale-0 transition-all duration-700 scale-110 hover:scale-100">
+                    </div>
+                </div>
+
+                <div class="max-w-4xl space-y-6 sm:space-y-10 flex-grow">
+                    <div class="inline-flex items-center space-x-3 bg-white/[0.03] px-4 py-2 rounded-full border border-white/10">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                        </span>
+                        <span class="text-slate-300 font-mono text-[9px] sm:text-[10px] uppercase tracking-widest font-bold">Soporte Técnico Operativo</span>
+                    </div>
+                    
+                    <h1 class="text-5xl sm:text-7xl md:text-6xl lg:text-[100px] font-extrabold text-white tracking-tighter leading-[0.9] pb-2">
+                        Wilfredo <br class="hidden sm:block"><span class="text-gradient">Rodríguez</span>
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl md:text-2xl text-slate-400 leading-relaxed font-light max-w-2xl">
+                        Desarrollador apasionado por la <span class="text-white border-b border-blue-500/30">Ciberseguridad</span> y 
+                        el <span class="text-white border-b border-blue-500/30">Software Libre.</span> Especializado en 
+                        <span class="text-white font-semibold">Automatización de Procesos.</span>
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-6">
+                        <a href="https://github.com/xorodev" target="_blank" class="glass px-8 sm:px-12 py-4 sm:py-6 rounded-2xl text-white font-bold hover:bg-white hover:text-black transition-all duration-500 flex justify-center items-center group">
+                            <i class="fab fa-github mr-3 text-xl transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110"></i> Ver GitHub
+                        </a>
+                        <a href="mailto:wilfredorb0218@gmail.com" class="px-8 sm:px-12 py-4 sm:py-6 rounded-2xl bg-blue-600 text-white font-bold hover:bg-blue-500 transition-all duration-500 shadow-[0_0_40px_-10px_rgba(59,130,246,0.5)] flex justify-center items-center group">
+                            Contactar Ahora <i class="fas fa-arrow-right ml-3 text-sm transition-transform duration-500 group-hover:translate-x-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="perfil" class="py-16 sm:py-32 border-t border-white/5">
+            <div class="grid md:grid-cols-2 gap-10 md:gap-20">
+                <div class="space-y-6">
+                    <h2 class="text-xs font-bold uppercase tracking-[0.5em] text-blue-500">Sobre mí</h2>
+                    <h3 class="text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight">
+                        Soluciones técnicas con un enfoque <span class="text-slate-600">diligente y proactivo.</span>
+                    </h3>
+                </div>
+                <div class="space-y-6 sm:space-y-8 text-lg sm:text-xl text-slate-400 leading-relaxed font-light">
+                    <p>
+                        Soy un profesional responsable y dedicado, con una sólida base técnica desarrollada desde la infancia. Mi enfoque principal es garantizar la estabilidad tecnológica mediante un aprendizaje rápido basado en la práctica constante.
+                    </p>
+                    <p>
+                        Me comprometo a aportar soluciones definitivas en soporte técnico y ciberseguridad, asegurando siempre el cumplimiento de deberes con humildad.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="stack" class="py-16 sm:py-32 border-t border-white/5">
+            <div class="flex items-center justify-between mb-12 sm:mb-24">
+                <h2 class="text-xs font-bold uppercase tracking-[0.5em] text-blue-500">Skills</h2>
+                <div class="h-[1px] flex-grow mx-6 sm:mx-12 bg-white/5 hidden sm:block"></div>
+                <span class="font-mono text-xs text-slate-600">Experiencia Técnica</span>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass p-6 sm:p-8 rounded-[2rem] skill-card hover-blue group">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 mb-6 text-xl">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3 class="text-white text-lg font-bold mb-4">Soporte Multiplataforma</h3>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-blue-500 shrink-0"></span> Mantenimiento y reparación de hardware en equipos de escritorio y laptops.</li>
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-blue-500 shrink-0"></span> Configuración de sistemas operativos en entornos Windows, macOS y Linux.</li>
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-blue-500 shrink-0"></span> Resolución de fallas técnicas y soporte técnico a nivel de software.</li>
+                    </ul>
+                </div>
+
+                <div class="glass p-6 sm:p-8 rounded-[2rem] skill-card hover-emerald group">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-6 text-xl">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-white text-lg font-bold mb-4">Seguridad y Forense</h3>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-emerald-500 shrink-0"></span> Identificación de vulnerabilidades y puntos débiles en el sistema.</li>
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-emerald-500 shrink-0"></span> Uso de herramientas forenses para el diagnóstico de incidentes.</li>
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-emerald-500 shrink-0"></span> Aplicación de ajustes de seguridad para la protección de datos.</li>
+                    </ul>
+                </div>
+
+                <div class="glass p-6 sm:p-8 rounded-[2rem] skill-card hover-purple group">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-6 text-xl">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="text-white text-lg font-bold mb-4">Infraestructura de Red</h3>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-purple-500 shrink-0"></span> Conexión y gestión de equipos dentro de una red local.</li>
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-purple-500 shrink-0"></span> Instalación de puntos de red y cableado estructurado.</li>
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-purple-500 shrink-0"></span> Revisión y mantenimiento de la conectividad de los nodos.</li>
+                    </ul>
+                </div>
+
+                <div class="glass p-6 sm:p-8 rounded-[2rem] skill-card hover-orange group">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-400 mb-6 text-xl">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-white text-lg font-bold mb-4">Automatización & Dev</h3>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-orange-500 shrink-0"></span> Creación de scripts sencillos para automatizar tareas y procesos.</li>
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-orange-500 shrink-0"></span> Desarrollo de programas enfocados en resolver problemas lógicos.</li>
+                        <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-orange-500 shrink-0"></span> Uso de Git para organizar y documentar el código de los proyectos.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech-clave" class="py-16 sm:py-32 border-t border-white/5">
+            <h2 class="text-xs font-bold uppercase tracking-[0.5em] text-blue-500 mb-10 sm:mb-16">Tecnologías Centrales</h2>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
+                <div>
+                    <h3 class="text-white font-bold mb-6 flex items-center gap-3">
+                        <span class="text-blue-500">01</span> Herramientas
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">Autopsy</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">BurpSuite</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">IDA Pro</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">Nmap</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">Metasploit</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">Wireshark</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-6 flex items-center gap-3">
+                        <span class="text-emerald-500">02</span> Lenguajes
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">Assembly x86</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">Bash</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">C/C++</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">Lua/Luau</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">PowerShell</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">Python</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-6 flex items-center gap-3">
+                        <span class="text-purple-500">03</span> DevOps
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">Docker</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">Git</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-md text-[11px] border border-white/10">GitHub Actions</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiencia" class="py-16 sm:py-32 border-t border-white/5">
+            <h2 class="text-xs font-bold uppercase tracking-[0.5em] text-blue-500 mb-12 sm:mb-20 text-center">Trayectoria Profesional</h2>
+            <div class="glass p-6 sm:p-10 md:p-20 rounded-[2rem] sm:rounded-[4rem] relative overflow-hidden group transition-all duration-700 hover:border-white/10">
+                <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-16 relative z-10">
+                    <div class="max-w-2xl space-y-6 sm:space-y-8">
+                        <div>
+                            <div class="inline-block px-4 py-1 rounded-full border border-emerald-500/20 text-emerald-500 font-mono text-[10px] uppercase tracking-widest mb-6">
+                                Septiembre 2025 — Octubre 2025
+                            </div>
+                            <h3 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tighter mb-2">Supermercado La Colonia</h3>
+                            <p class="text-blue-500 text-lg sm:text-xl font-medium tracking-tight">Práctica Profesional en Informática</p>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <p class="text-slate-400 text-base sm:text-lg leading-relaxed">
+                                Apoyo técnico directo en la infraestructura, garantizando que los servicios informáticos operaran sin interrupciones para el flujo diario.
+                            </p>
+                            <ul class="grid sm:grid-cols-2 gap-6 text-sm">
+                                <li class="space-y-2 group/item">
+                                    <span class="text-white font-bold uppercase text-[10px] tracking-widest block transition-colors group-hover/item:text-blue-500">Continuidad Operativa</span>
+                                    Atención y solución de fallos técnicos en equipos corporativos de diferentes marcas como iMac, Dell, HP y mantenimiento preventivo para evitar incidencias en el equipo de trabajo.
+                                </li>
+                                <li class="space-y-2 group/item">
+                                    <span class="text-white font-bold uppercase text-[10px] tracking-widest block transition-colors group-hover/item:text-blue-500">Sistemas y Redes</span>
+                                    Instalación de software y configuración de sistemas operativos según las necesidades del área y la gestión de equipos dentro del dominio de red para asegurar su correcto conexión y funcionamiento.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 text-left md:text-right">
+                        <div class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-transform duration-500 group-hover:scale-110 group-hover:bg-blue-500">
+                            ¡Finalizado!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="educacion" class="py-16 sm:py-32 border-t border-white/5 grid md:grid-cols-2 gap-16 md:gap-32">
+            <div class="space-y-10 sm:space-y-12">
+                <h2 class="text-xs font-bold uppercase tracking-[0.5em] text-blue-500">Educación</h2>
+                <div class="space-y-6 group">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Bachillerato Técnico Profesional en Informática</h3>
+                    <p class="text-slate-500 text-lg sm:text-xl leading-snug">Jardín Escuela e Instituto No Gubernamental "Santa Mónica"</p>
+                    <div class="inline-block px-4 py-1 rounded-full border border-blue-500/20 text-blue-500 font-mono text-[10px] uppercase tracking-widest">
+                        Noviembre 2025
+                    </div>
+                    <div class="flex items-center gap-4 bg-emerald-500/5 px-6 py-4 rounded-2xl border border-emerald-500/10 transition-all duration-500 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/30">
+                        <i class="fas fa-star text-emerald-500 animate-star"></i>
+                        <span class="font-bold text-emerald-400 text-sm sm:text-base">Excelencia Académica (95%)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="space-y-10 sm:space-y-12">
+                <h2 class="text-xs font-bold uppercase tracking-[0.5em] text-blue-500">Idiomas</h2>
+                <div class="space-y-8 sm:space-y-10">
+                    <div class="group">
+                        <div class="flex justify-between items-end mb-3">
+                            <span class="text-white font-bold text-xl sm:text-2xl tracking-tighter">Español</span>
+                            <span class="text-slate-600 font-mono text-[9px] uppercase">Nivel: Nativo</span>
+                        </div>
+                        <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-blue-500 w-full"></div>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="flex justify-between items-end mb-3">
+                            <span class="text-white font-bold text-xl sm:text-2xl tracking-tighter">Inglés</span>
+                            <span class="text-slate-600 font-mono text-[9px] uppercase">Nivel: Técnico</span>
+                        </div>
+                        <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-slate-700 w-[65%] group-hover:bg-blue-400 transition-all duration-700"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="py-16 sm:py-32 border-t border-white/5">
+            <div class="text-center mb-16 sm:mb-32">
+                <h3 class="text-5xl sm:text-7xl md:text-[100px] font-extrabold text-white tracking-tighter leading-none">Contacto</h3>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+                <a href="mailto:wilfredorb0218@gmail.com" class="glass p-8 sm:p-12 rounded-[2.5rem] sm:rounded-[3.5rem] hover:bg-white hover:text-black transition-all duration-700 group text-center overflow-hidden">
+                    <div class="mb-4 sm:mb-6 flex justify-center">
+                        <i class="fas fa-envelope text-2xl sm:text-3xl text-blue-500 transition-all duration-500 group-hover:scale-125 group-hover:rotate-12 group-hover:text-black"></i>
+                    </div>
+                    <p class="text-[9px] uppercase tracking-[0.4em] font-bold text-slate-500 mb-2">Email Personal</p>
+                    <span class="text-base sm:text-xl md:text-2xl font-bold tracking-tight break-all">wilfredorb0218@gmail.com</span>
+                </a>
+                <a href="tel:+50497764448" class="glass p-8 sm:p-12 rounded-[2.5rem] sm:rounded-[3.5rem] hover:bg-white hover:text-black transition-all duration-700 group text-center overflow-hidden">
+                    <div class="mb-4 sm:mb-6 flex justify-center">
+                        <i class="fas fa-phone text-2xl sm:text-3xl text-emerald-500 transition-all duration-500 group-hover:scale-125 group-hover:-rotate-12 group-hover:text-black"></i>
+                    </div>
+                    <p class="text-[9px] uppercase tracking-[0.4em] font-bold text-slate-500 mb-2">Teléfono</p>
+                    <span class="text-lg sm:text-xl md:text-2xl font-bold tracking-tight">+504 9776-4448</span>
+                </a>
+            </div>
+
+            <div class="mt-16 sm:mt-32 grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div class="p-8 sm:p-10 border border-white/5 rounded-[2.5rem] bg-white/[0.01] flex flex-wrap justify-between items-center group hover:border-blue-500/30 transition-all duration-500 gap-4">
+                    <div>
+                        <p class="text-blue-500 font-bold text-lg mb-1">César Vargas</p>
+                        <p class="text-[9px] text-slate-500 uppercase tracking-widest leading-relaxed">Coordinador de Soporte Técnico
+                            <br>> Supermercado La Colonia
+                        </p>
+                    </div>
+                    <p class="text-white font-mono text-sm sm:text-base">+504 9951-6264</p>
+                </div>
+                <div class="p-8 sm:p-10 border border-white/5 rounded-[2.5rem] bg-white/[0.01] flex flex-wrap justify-between items-center group hover:border-blue-500/30 transition-all duration-500 gap-4">
+                    <div>
+                        <p class="text-blue-500 font-bold text-lg mb-1">Erick Barahona</p>
+                        <p class="text-[9px] text-slate-500 uppercase tracking-widest leading-relaxed">Técnico en Redes
+                            <br>> Supermercado La Colonia
+                        </p>
+                    </div>
+                    <p class="text-white font-mono text-sm sm:text-base">+504 9786-0109</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-10 sm:py-20 border-t border-white/5 text-center">
+        <div class="flex justify-center gap-5 mb-8">
+            <a href="https://www.instagram.com/xorodev" target="_blank" class="w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-500 hover:scale-110 shadow-lg shadow-pink-500/20" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
+                <i class="fab fa-instagram text-xl"></i>
+            </a>
+            <a href="https://www.reddit.com/user/xorodev" target="_blank" class="w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-500 hover:scale-110 shadow-lg shadow-orange-600/20" style="background-color: #FF4500;">
+                <i class="fab fa-reddit-alien text-xl"></i>
+            </a>
+        </div>
+        <p class="text-[9px] sm:text-[10px] uppercase tracking-[0.8em] sm:tracking-[1.2em] text-slate-700 font-black cursor-default transition-all duration-500 hover:text-slate-400 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
+            Copyright &copy; 2026
+        </p>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        function toggleMenu() {
+            const isOpen = mobileMenu.classList.toggle('active');
+            
+            if (isOpen) {
+                line1.style.transform = 'translateY(5px) rotate(45deg)';
+                line2.style.transform = 'translateY(-5px) rotate(-45deg)';
+                line2.style.width = '24px';
+                document.body.style.overflow = 'hidden';
+                mobileMenu.classList.remove('translate-x-full');
+            } else {
+                line1.style.transform = 'translateY(0) rotate(0)';
+                line2.style.transform = 'translateY(0) rotate(0)';
+                line2.style.width = '16px';
+                document.body.style.overflow = '';
+                mobileMenu.classList.add('translate-x-full');
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024 && mobileMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+        const originalTitle = document.title;
+        window.addEventListener('blur', () => {
+            document.title = 'CipherCoreDev | Web Portfolio';
+        });
+        window.addEventListener('focus', () => {
+            document.title = originalTitle;
+        });
+    </script>
+
+</body>
+</html>
