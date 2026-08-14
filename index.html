@@ -108,6 +108,26 @@
             h1 { font-size: 2.5rem !important; }
             .glass { padding: 1.5rem !important; }
         }
+
+        .cert-viewmore.hidden { display: none; }
+        .cert-viewmore:not(.hidden) { display: inline-flex; }
+
+        #lightbox-img {
+            transform-origin: center center;
+            transition: transform 0.25s var(--bezier);
+            cursor: zoom-in;
+            touch-action: none;
+        }
+
+        #lightbox-img.is-zoomed {
+            cursor: grab;
+            transition: none;
+        }
+
+        #lightbox-img.is-dragging {
+            cursor: grabbing;
+            transition: none;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -377,6 +397,12 @@
                     </div>
                 </div>
             </div>
+
+            <div class="md:col-span-2 pt-4 sm:pt-6 flex justify-center">
+                <button id="cert-trigger" type="button" class="glass px-8 sm:px-10 py-4 sm:py-5 rounded-2xl text-white font-bold hover:bg-white hover:text-black transition-all duration-500 flex justify-center items-center group">
+                    <i class="fas fa-certificate mr-3 text-blue-500 transition-colors duration-500 group-hover:text-black"></i> Ver certificaciones
+                </button>
+            </div>
         </section>
 
         <section id="contacto" class="py-16 sm:py-32 border-t border-white/5">
@@ -424,19 +450,342 @@
         </section>
     </main>
 
-    <footer class="py-10 sm:py-20 border-t border-white/5 text-center">
-        <div class="flex justify-center gap-5 mb-8">
-            <a href="https://www.instagram.com/xorodev" target="_blank" class="w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-500 hover:scale-110 shadow-lg shadow-pink-500/20" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
+    <footer class="py-10 sm:py-16 border-t border-white/5 text-center">
+        <div class="flex justify-center gap-5 mb-6">
+            <a href="https://www.instagram.com/xorodev" target="_blank" class="w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-300 ease-in-out hover:scale-110 shadow-lg shadow-pink-500/20" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
                 <i class="fab fa-instagram text-xl"></i>
             </a>
-            <a href="https://www.reddit.com/user/xorodev" target="_blank" class="w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-500 hover:scale-110 shadow-lg shadow-orange-600/20" style="background-color: #FF4500;">
+            <a href="https://www.reddit.com/user/xorodev" target="_blank" class="w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-300 ease-in-out hover:scale-110 shadow-lg shadow-orange-600/20" style="background-color: #FF4500;">
                 <i class="fab fa-reddit-alien text-xl"></i>
             </a>
         </div>
-        <p class="text-[9px] sm:text-[10px] uppercase tracking-[0.8em] sm:tracking-[1.2em] text-slate-700 font-black cursor-default transition-all duration-500 hover:text-slate-400 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
-            Copyright &copy; 2026
+        <p class="group inline-block text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] leading-relaxed text-slate-500 font-semibold cursor-default transition-all duration-300 ease-in-out hover:text-slate-200 hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
+            "La disciplina convierte el conocimiento en resultados."
+            <span class="block mt-2 text-[9px] sm:text-[10px] text-slate-600 font-bold tracking-[0.15em] transition-colors duration-300 ease-in-out group-hover:text-slate-400">
+               — Wilfredo Rodríguez Barahona
+            </span>
         </p>
     </footer>
+
+    <div id="cert-modal" class="fixed inset-0 z-[200] opacity-0 invisible pointer-events-none transition-opacity duration-500">
+        <div id="cert-backdrop" class="absolute inset-0 bg-black/85 backdrop-blur-xl"></div>
+
+        <div id="cert-content" class="relative h-full overflow-y-auto scale-95 transition-transform duration-500">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-24 sm:py-32">
+
+                <div class="flex items-start justify-between mb-16 sm:mb-24">
+                    <div>
+                        <h2 class="text-xs font-bold uppercase tracking-[0.5em] text-blue-500 mb-4">Anexos</h2>
+                        <h3 class="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tighter">Certificaciones</h3>
+                    </div>
+                    <button id="cert-close" type="button" class="glass w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-500 shrink-0">
+                        <i class="fas fa-times text-lg sm:text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Cisco Networking Academy -->
+                <div class="mb-16 sm:mb-24">
+                    <div class="flex items-center justify-between mb-8 sm:mb-12">
+                        <h4 class="text-white text-xl sm:text-2xl font-bold tracking-tight flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-blue-500"></span> Cisco Networking Academy
+                        </h4>
+                        <span class="font-mono text-[10px] sm:text-xs text-slate-600 uppercase tracking-widest hidden sm:block">05 Certificados</span>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-blue group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/cisco-ccna1-introduccion-redes" src="certs/cisco-ccna1-introduccion-redes.png" alt="CCNA 01: Introduction to Networks" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug mb-3">CCNA 01: Introduction to Networks</h5>
+                            <div class="inline-block px-3 py-1 rounded-full border border-orange-500/20 text-orange-500 font-mono text-[9px] uppercase tracking-widest">En proceso...</div>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-blue-500 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-blue group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/cisco-conceptos-hardware" src="certs/cisco-conceptos-hardware.png" alt="Conceptos Básicos de Hardware de Computadora" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug">Conceptos Básicos de Hardware de Computadora</h5>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-blue-500 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-blue group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/cisco-seguridad-proteccion" src="certs/cisco-seguridad-proteccion.png" alt="Conciencia sobre Seguridad y Protección Digital" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug">Conciencia sobre Seguridad y Protección Digital</h5>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-blue-500 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-blue group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/cisco-introduccion-ciberseguridad" src="certs/cisco-introduccion-ciberseguridad.png" alt="Introducción a Ciberseguridad" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug">Introducción a Ciberseguridad</h5>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-blue-500 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-blue group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/cisco-introduccion-linux" src="certs/cisco-introduccion-linux.png" alt="Introducción a Linux" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug">Introducción a Linux</h5>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-blue-500 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Oracle Academy -->
+                <div class="mb-16 sm:mb-24">
+                    <div class="flex items-center justify-between mb-8 sm:mb-12">
+                        <h4 class="text-white text-xl sm:text-2xl font-bold tracking-tight flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-purple-500"></span> Oracle Academy
+                        </h4>
+                        <span class="font-mono text-[10px] sm:text-xs text-slate-600 uppercase tracking-widest hidden sm:block">02 Certificados</span>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-purple group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/oracle-conceptos-java" src="certs/oracle-conceptos-java.png" alt="Conceptos Fundamentales de Java" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug mb-3">Conceptos Fundamentales de Java</h5>
+                            <div class="inline-block px-3 py-1 rounded-full border border-orange-500/20 text-orange-500 font-mono text-[9px] uppercase tracking-widest">En proceso...</div>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-purple-400 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-purple group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/oracle-fundamentos-bases-datos" src="certs/oracle-fundamentos-bases-datos.png" alt="Fundamentos de Bases de Datos" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug mb-3">Fundamentos de Bases de Datos</h5>
+                            <div class="inline-block px-3 py-1 rounded-full border border-orange-500/20 text-orange-500 font-mono text-[9px] uppercase tracking-widest">En proceso...</div>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-purple-400 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- INFOP Honduras -->
+                <div>
+                    <div class="flex items-center justify-between mb-8 sm:mb-12">
+                        <h4 class="text-white text-xl sm:text-2xl font-bold tracking-tight flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> INFOP Honduras
+                        </h4>
+                        <span class="font-mono text-[10px] sm:text-xs text-slate-600 uppercase tracking-widest hidden sm:block">07 Certificados</span>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-emerald group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/infop-administracion-centros-computo" src="certs/infop-administracion-centros-computo.png" alt="Administración de centros de cómputo" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug mb-3">Administración de Centros de Cómputo</h5>
+                            <div class="inline-block px-3 py-1 rounded-full border border-orange-500/20 text-orange-500 font-mono text-[9px] uppercase tracking-widest">En proceso...</div>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-emerald-400 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-emerald group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/infop-mysql" src="certs/infop-mysql.png" alt="Base de Datos MySQL" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug">Base de Datos MySQL</h5>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-emerald-400 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-emerald group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/infop-servicio-cliente" src="certs/infop-servicio-cliente.png" alt="Herramientas para el Servicio al Cliente" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug">Herramientas para el Servicio al Cliente</h5>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-emerald-400 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-emerald group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/infop-introduccion-ciberseguridad" src="certs/infop-introduccion-ciberseguridad.png" alt="Introducción a La Ciberseguridad" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug mb-3">Introducción a La Ciberseguridad</h5>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-emerald-400 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-emerald group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/infop-introduccion-linux" src="certs/infop-introduccion-linux.png" alt="Introducción a Linux" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug mb-3">Introducción a Linux</h5>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-emerald-400 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-emerald group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/infop-excel-avanzado" src="certs/infop-excel-avanzado.png" alt="Microsoft Excel (Nivel Avanzado)" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug">Microsoft Excel (Nivel Avanzado)</h5>
+                            <div class="inline-block px-3 py-1 rounded-full border border-orange-500/20 text-orange-500 font-mono text-[9px] uppercase tracking-widest">En proceso...</div>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-emerald-400 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-emerald group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/infop-python" src="certs/infop-python.png" alt="Programar en Python" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug">Programar en Python</h5>
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-emerald-400 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Others -->
+                <div class="mt-16 sm:mt-24">
+                    <div class="flex items-center justify-between mb-8 sm:mb-12">
+                        <h4 class="text-white text-xl sm:text-2xl font-bold tracking-tight flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-cyan-500"></span> Otros
+                        </h4>
+                        <span class="font-mono text-[10px] sm:text-xs text-slate-600 uppercase tracking-widest hidden sm:block">01 Certificado</span>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+
+                        <div class="glass rounded-[2rem] p-4 sm:p-6 skill-card hover-blue group">
+                            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] mb-5">
+                                <img data-base="certs/fcs-introduccion-programacion" src="certs/fcs-introduccion-programacion.png" alt="Introducción a La Programación" onerror="certImgFallback(this)" class="cert-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="hidden absolute inset-0 flex-col items-center justify-center gap-3 text-slate-700">
+                                    <i class="fas fa-award text-3xl"></i>
+                                    <span class="text-[9px] uppercase tracking-widest font-bold">Próximamente</span>
+                                </div>
+                            </div>
+                            <h5 class="text-white font-bold text-sm sm:text-base leading-snug mb-1">Introducción a La Programación</h5>
+                            <p class="text-slate-400 text-xs font-medium mb-3 flex items-center gap-1.5">
+                              <i class="fas fa-building-columns text-cyan-500/70 text-[11px]"></i>
+                              <a href="https://aprende.org/" target="_blank" rel="noopener noreferrer" class="group/link relative inline-flex items-center gap-1 text-slate-400 hover:text-cyan-400 transition-colors duration-300 py-0.5">
+                                <span>Fundación Carlos Slim</span>
+                                <i class="fas fa-arrow-up-right-from-square text-[9px] text-cyan-500/80 group-hover/link:text-cyan-400 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all duration-300"></i>
+                                <span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-cyan-400 transition-all duration-300 group-hover/link:w-full"></span>
+                              </a>
+                            </p>
+
+                            <button type="button" class="cert-viewmore hidden mt-3 items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-blue-500 hover:text-white transition-colors duration-300">
+                                <i class="fas fa-expand text-[9px]"></i> Ver más
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="cert-lightbox" class="fixed inset-0 z-[300] opacity-0 invisible pointer-events-none transition-opacity duration-500 flex items-center justify-center">
+        <div id="lightbox-backdrop" class="absolute inset-0 bg-black/95 backdrop-blur-2xl"></div>
+
+        <button id="lightbox-close" type="button" class="absolute top-6 right-6 sm:top-8 sm:right-8 z-20 glass w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-500">
+            <i class="fas fa-times text-lg sm:text-xl"></i>
+        </button>
+
+        <div id="lightbox-viewport" class="relative z-10 flex items-center justify-center">
+            <img id="lightbox-img" src="" alt="" draggable="false" class="max-w-[92vw] max-h-[80vh] w-auto h-auto object-contain select-none rounded-xl shadow-2xl">
+        </div>
+
+        <div class="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 sm:gap-4">
+            <button id="lightbox-zoom-out" type="button" class="glass w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-500">
+                <i class="fas fa-minus text-sm"></i>
+            </button>
+            <button id="lightbox-reset" type="button" class="glass px-5 sm:px-6 py-3 rounded-full text-white font-bold text-[10px] sm:text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-500">
+                Restablecer Zoom
+            </button>
+            <button id="lightbox-zoom-in" type="button" class="glass w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-500">
+                <i class="fas fa-plus text-sm"></i>
+            </button>
+        </div>
+    </div>
 
     <script>
         const menuToggle = document.getElementById('menu-toggle');
@@ -480,12 +829,209 @@
         });
         const originalTitle = document.title;
         window.addEventListener('blur', () => {
-            document.title = 'CipherCoreDev | Web Portfolio';
+            document.title = 'xorodev | Web Portfolio';
         });
         window.addEventListener('focus', () => {
             document.title = originalTitle;
+        });
+
+        function certImgFallback(img) {
+            const exts = ['png', 'webp', 'jpeg', 'jpg'];
+            const tried = img.dataset.tried ? parseInt(img.dataset.tried, 10) : 0;
+            if (tried < exts.length) {
+                img.dataset.tried = tried + 1;
+                img.src = `${img.dataset.base}.${exts[tried]}`;
+            } else {
+                img.onerror = null;
+                img.style.display = 'none';
+                const fallback = img.nextElementSibling;
+                fallback.classList.remove('hidden');
+                fallback.classList.add('flex');
+            }
+        }
+
+        const certModal = document.getElementById('cert-modal');
+        const certContent = document.getElementById('cert-content');
+        const certTrigger = document.getElementById('cert-trigger');
+        const certClose = document.getElementById('cert-close');
+        const certBackdrop = document.getElementById('cert-backdrop');
+
+        function openCertModal() {
+            certModal.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
+            document.body.style.overflow = 'hidden';
+            requestAnimationFrame(() => certContent.classList.remove('scale-95'));
+        }
+
+        function closeCertModal() {
+            certModal.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+            certContent.classList.add('scale-95');
+            document.body.style.overflow = '';
+        }
+
+        certTrigger.addEventListener('click', openCertModal);
+        certClose.addEventListener('click', closeCertModal);
+        certBackdrop.addEventListener('click', closeCertModal);
+
+        function certImgLoaded(img) {
+            const card = img.closest('.group');
+            if (!card) return;
+            const btn = card.querySelector('.cert-viewmore');
+            if (btn) {
+                btn.classList.remove('hidden');
+                btn.dataset.full = img.currentSrc || img.src;
+                btn.dataset.alt = img.alt;
+            }
+            img.classList.add('cursor-zoom-in');
+        }
+
+        document.querySelectorAll('.cert-img').forEach((img) => {
+            img.addEventListener('load', () => certImgLoaded(img));
+            if (img.complete && img.naturalWidth > 0) certImgLoaded(img);
+            img.addEventListener('click', () => {
+                if (img.style.display !== 'none') {
+                    openCertLightbox(img.currentSrc || img.src, img.alt);
+                }
+            });
+        });
+
+        document.querySelectorAll('.cert-viewmore').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const img = btn.closest('.group').querySelector('.cert-img');
+                if (img) openCertLightbox(img.currentSrc || img.src, img.alt);
+            });
+        });
+
+        const lightbox = document.getElementById('cert-lightbox');
+        const lightboxViewport = document.getElementById('lightbox-viewport');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+        const lightboxZoomIn = document.getElementById('lightbox-zoom-in');
+        const lightboxZoomOut = document.getElementById('lightbox-zoom-out');
+        const lightboxReset = document.getElementById('lightbox-reset');
+
+        const ZOOM_MIN = 1;
+        const ZOOM_MAX = 4;
+        const ZOOM_STEP = 0.5;
+        let zoomScale = 1;
+        let panX = 0;
+        let panY = 0;
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let pinchStartDist = null;
+        let pinchStartScale = 1;
+
+        function applyLightboxTransform() {
+            lightboxImg.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
+            lightboxImg.classList.toggle('is-zoomed', zoomScale > ZOOM_MIN);
+        }
+
+        function setZoom(newScale) {
+            zoomScale = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, newScale));
+            if (zoomScale === ZOOM_MIN) { panX = 0; panY = 0; }
+            applyLightboxTransform();
+        }
+
+        function resetLightboxZoom() {
+            zoomScale = ZOOM_MIN;
+            panX = 0;
+            panY = 0;
+            applyLightboxTransform();
+        }
+
+        function openCertLightbox(src, alt) {
+            lightboxImg.src = src;
+            lightboxImg.alt = alt || 'Certificado';
+            resetLightboxZoom();
+            lightbox.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCertLightbox() {
+            lightbox.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+            resetLightboxZoom();
+            document.body.style.overflow = certModal.classList.contains('invisible') ? '' : 'hidden';
+        }
+
+        lightboxClose.addEventListener('click', closeCertLightbox);
+        lightboxBackdrop.addEventListener('click', closeCertLightbox);
+        lightboxZoomIn.addEventListener('click', () => setZoom(zoomScale + ZOOM_STEP));
+        lightboxZoomOut.addEventListener('click', () => setZoom(zoomScale - ZOOM_STEP));
+        lightboxReset.addEventListener('click', resetLightboxZoom);
+
+        lightboxViewport.addEventListener('wheel', (e) => {
+            if (lightbox.classList.contains('invisible')) return;
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.25 : 0.25;
+            setZoom(zoomScale + delta);
+        }, { passive: false });
+
+        lightboxImg.addEventListener('mousedown', (e) => {
+            if (zoomScale <= ZOOM_MIN) return;
+            e.preventDefault();
+            isDragging = true;
+            dragStartX = e.clientX - panX;
+            dragStartY = e.clientY - panY;
+            lightboxImg.classList.add('is-dragging');
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            panX = e.clientX - dragStartX;
+            panY = e.clientY - dragStartY;
+            applyLightboxTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+            lightboxImg.classList.remove('is-dragging');
+        });
+
+        function touchDistance(touches) {
+            const dx = touches[0].clientX - touches[1].clientX;
+            const dy = touches[0].clientY - touches[1].clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        lightboxImg.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1 && zoomScale > ZOOM_MIN) {
+                isDragging = true;
+                dragStartX = e.touches[0].clientX - panX;
+                dragStartY = e.touches[0].clientY - panY;
+            } else if (e.touches.length === 2) {
+                isDragging = false;
+                pinchStartDist = touchDistance(e.touches);
+                pinchStartScale = zoomScale;
+            }
+        }, { passive: true });
+
+        lightboxImg.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1 && isDragging) {
+                panX = e.touches[0].clientX - dragStartX;
+                panY = e.touches[0].clientY - dragStartY;
+                applyLightboxTransform();
+            } else if (e.touches.length === 2 && pinchStartDist !== null) {
+                const dist = touchDistance(e.touches);
+                setZoom(pinchStartScale * (dist / pinchStartDist));
+            }
+        }, { passive: true });
+
+        lightboxImg.addEventListener('touchend', () => {
+            isDragging = false;
+            pinchStartDist = null;
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape') return;
+            if (!lightbox.classList.contains('invisible')) {
+                closeCertLightbox();
+            } else if (!certModal.classList.contains('invisible')) {
+                closeCertModal();
+            }
         });
     </script>
 
 </body>
 </html>
+<!-- Created by: Wilfredo Rodríguez Barahona -->
